@@ -1,4 +1,4 @@
-#Laporan Assesment - Destia Eka
+# Laporan Assesment - Destia Eka
 
 ## Troubleshooting
 - **Masalah**: Terdapat kesalahan penulisan script pada file /etc/nginx/sites-enabled/default
@@ -34,18 +34,20 @@ root@ubuntu-24:~# systemctl status nginx
 ![nginx](/assetes/nginx.jpg)
 
 ## Security Hardening
-- **UFW Status**: ![ufw-status](/assetes/ufw-status.jpg)
+- **UFW Status**: allow port 6622(ssh), 80(http), 443(https)
+![ufw-status](/assetes/ufw-status.jpg)
 - **Login SSH**: apabila device tidak memiliki private key akan gagal
 ![permission-denied](/assetes/permission-denied.jpg)
 - **Login SSH**: namun apabila device memiliki private key akan berhasil
 ![success](/assetes/ssh-succes.jpg)
 
 ## Containerization
+```
 FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
 COPY index.html .
 EXPOSE 80
-
+```
 ```
 agus-admin@ubuntu-24:/opt/app-test$ sudo docker ps
 [sudo] password for agus-admin:
