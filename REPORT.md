@@ -29,26 +29,16 @@ root@ubuntu-24:~# systemctl status nginx
 ● nginx.service - A high performance web server and a reverse proxy server
      Loaded: loaded (/usr/lib/systemd/system/nginx.service; enabled; preset: enabled)
      Active: active (running) since Mon 2026-04-06 08:51:09 UTC; 4s ago
-       Docs: man:nginx(8)
-    Process: 36501 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
-    Process: 36503 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
-   Main PID: 36504 (nginx)
-      Tasks: 2 (limit: 1023)
-     Memory: 1.7M (peak: 1.9M)
-        CPU: 16ms
-     CGroup: /system.slice/nginx.service
-             ├─36504 "nginx: master process /usr/sbin/nginx -g daemon on; master_process on;"
-             └─36505 "nginx: worker process"
-
-Apr 06 08:51:09 ubuntu-24 systemd[1]: Starting nginx.service - A high performance web server and a reverse proxy server...
-Apr 06 08:51:09 ubuntu-24 systemd[1]: Started nginx.service - A high performance web server and a reverse proxy server.
 ```
 - **Bukti**:
 ![nginx](/assetes/nginx.jpg)
 
 ## Security Hardening
 - **UFW Status**: ![ufw-status](/assetes/ufw-status.jpg)
-- **Login SSH**: ![permission-denied](/assetes/permission-denied.jpg)
+- **Login SSH**: apabila device tidak memiliki private key akan gagal
+![permission-denied](/assetes/permission-denied.jpg)
+- **Login SSH**: namun apabila device memiliki private key akan berhasil
+![success](/assetes/ssh-succes.jpg)
 
 ## Containerization
 FROM nginx:alpine
@@ -67,6 +57,7 @@ CONTAINER ID   IMAGE             COMMAND                  CREATED          STATU
 
 ## Automation
 root@ubuntu-24:~# cat backup.sh
+```
 #!/bin/bash
 
 BACKUP_DIR="/backup"
@@ -80,6 +71,7 @@ tar -czf "$BACKUP_DIR/$FILENAME" "$SOURCE_DIR"
 find "$BACKUP_DIR" -name "log-backup-*.tar.gz" -mtime +$RETENTION_DAYS -delete
 root@ubuntu-24:~# crontab -l
  0 2 * * * /root/backup.sh
+```
 
 ```
 root@ubuntu-24:~# chmod +x backup.sh
@@ -91,6 +83,7 @@ log-backup-2026-04-06.tar.gz
 
 ## Architecture Design
 ![arcitegtur](/assetes/traffic.jpg)
+
 disini menggunakan beberapa teknologi tambahan yaitu
 1. Load Balancer : digunakan untuk membagi traffic yang masuk ke server, sehingga selutuh traffic akan terbagi sama rata, tidak akan berat di 1 app saja
 2. Auto Scalling : Apabila traffic sedang naik maka otomatis akan ada server baru(app) yang dibuat sama seperti server yang sudah ada, lalu apabila traffic sudah mulai menurun maka server tersebut akan terhapus sehingga tidak memakan terlalu banyak resource. 
