@@ -53,7 +53,7 @@ CONTAINER ID   IMAGE             COMMAND                  CREATED          STATU
 80a9ef1bcb06   app-test:latest   "/docker-entrypoint.…"   23 minutes ago   Up 23 minutes   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   app
 ```
 
-! [containerization](/assetes/containerization.jpg)
+![containerization](/assetes/containerization.jpg)
 
 ## Automation
 root@ubuntu-24:~# cat backup.sh
