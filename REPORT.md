@@ -89,4 +89,4 @@ log-backup-2026-04-06.tar.gz
 disini menggunakan beberapa teknologi tambahan yaitu
 1. Load Balancer : digunakan untuk membagi traffic yang masuk ke server, sehingga selutuh traffic akan terbagi sama rata, tidak akan berat di 1 app saja
 2. Auto Scalling : Apabila traffic sedang naik maka otomatis akan ada server baru(app) yang dibuat sama seperti server yang sudah ada, lalu apabila traffic sudah mulai menurun maka server tersebut akan terhapus sehingga tidak memakan terlalu banyak resource. 
-3. Replikasi database: apabila user melakukan operasi writer (insert, update, delete) maka request diarahkan ke database primary. namun apabila hanya operasi read (select) maka akan diarahkan ke database replica. kedua database tersebut akan saling melakukan sinkronisasi sehingga data keduanya akan konsisten
+3. Replikasi database: apabila user melakukan operasi writer (insert, update, delete) maka request diarahkan ke database primary. namun apabila hanya operasi read (select) maka akan diarahkan ke database replica. database tersebut akan saling melakukan sinkronisasi sehingga data keduanya akan konsisten
